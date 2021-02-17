@@ -1,0 +1,36 @@
+"apiVersion": "apps/v1"
+"kind": "Deployment"
+"metadata":
+  "name": "minecraft"
+"spec":
+  "replicas": 1
+  "selector":
+    "matchLabels":
+      "name": "minecraft"
+  "strategy":
+    "type": "Recreate"
+  "template":
+    "metadata":
+      "labels":
+        "name": "minecraft"
+    "spec":
+      "containers":
+      - "command":
+        - "/bin/bash"
+        - "-c"
+        - |
+          echo eula=true > eula.txt
+          exec java -Xmx300M -jar /paper/paper.jar -W /data
+        "image": "fish/minecraft:1"
+        "name": "minecraft"
+        "ports":
+        - "containerPort": 25565
+        "volumeMounts":
+        - "mountPath": "/data"
+          "name": "data"
+        "workingDir": "/data"
+      "hostNetwork": true
+      "volumes":
+      - "hostPath":
+          "path": "/data/minecraft"
+        "name": "data"

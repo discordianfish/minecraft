@@ -1,0 +1,27 @@
+"apiVersion": "v1"
+"kind": "Pod"
+"metadata":
+  "labels":
+    "name": "minecraft"
+  "name": "minecraft"
+"spec":
+  "containers":
+  - "command":
+    - "/bin/bash"
+    - "-c"
+    - |
+      echo eula=true > eula.txt
+      exec java -Xmx300M -jar /paper/paper.jar -W /data
+    "image": "fish/minecraft:1"
+    "name": "minecraft"
+    "ports":
+    - "containerPort": 25565
+    "volumeMounts":
+    - "mountPath": "/data"
+      "name": "data"
+    "workingDir": "/data"
+  "hostNetwork": true
+  "volumes":
+  - "hostPath":
+      "path": "/data/minecraft"
+    "name": "data"

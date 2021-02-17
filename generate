@@ -1,0 +1,4 @@
+#!/bin/bash
+set -euo pipefail
+
+jsonnet -J vendor/ -J lib/ site.jsonnet -S --multi generated/
