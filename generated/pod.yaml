@@ -11,7 +11,7 @@
     - "-c"
     - |
       echo eula=true > eula.txt
-      exec java -Xmx300M -jar /paper/paper.jar -W /data
+      exec java -Xmx500M -jar /paper/paper.jar -W /data
     "image": "fish/minecraft:1"
     "name": "minecraft"
     "ports":
