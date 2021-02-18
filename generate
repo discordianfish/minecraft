@@ -1,4 +1,5 @@
 #!/bin/bash
 set -euo pipefail
+IMAGE_TAG=${IMAGE_TAG:-$(git rev-parse --short HEAD)}
 
-jsonnet -J vendor/ -J lib/ site.jsonnet -S --multi generated/
+jsonnet -J vendor/ -J lib/ --ext-str image_tag="$IMAGE_TAG" site.jsonnet -S --multi generated/

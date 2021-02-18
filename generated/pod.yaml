@@ -14,7 +14,7 @@
       ln -s /paper/cache .
       echo eula=true > eula.txt
       exec java -Xmx1024M -Xms1024M -jar /paper/paper.jar -W /data
-    "image": "foo/bar"
+    "image": "fish/minecraft:1b8a38f"
     "name": "minecraft"
     "ports":
     - "containerPort": 25565
