@@ -1,5 +1,5 @@
 #!/bin/bash
 set -euo pipefail
-docker build -t docker.io/fish/minecraft:eb01ea59d63ee34190ff2358df66b15b5036bdf5 -f Dockerfile .
-docker push docker.io/fish/minecraft:eb01ea59d63ee34190ff2358df66b15b5036bdf5
+docker build -t docker.io/fish/minecraft:0b8be74c104f39eb31c2d8a9771bc1f7e185efa6 -f Dockerfile .
+docker push docker.io/fish/minecraft:0b8be74c104f39eb31c2d8a9771bc1f7e185efa6
 
