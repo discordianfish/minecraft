@@ -4,7 +4,7 @@ local k = import "github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet";
   _config:: {
     image: "fish/minecraft",
     port: 25565,
-    memory_limit: "500M",
+    memory_limit: "1024M",
     single_node: true, // FIXME: make this something more meaningful "static host assignment" etc
                        // or a mixin..
     data_host_path: "/data/minecraft",
