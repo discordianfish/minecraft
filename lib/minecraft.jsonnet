@@ -13,7 +13,9 @@ local k = import "github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet";
     k.apps.v1.deployment.new(name="minecraft", containers=[
       k.core.v1.container.new(name="minecraft", image=$._config.image) +
       k.core.v1.container.withWorkingDir("/data") +
-      k.core.v1.container.withCommand(['/bin/bash', '-c', |||
+      k.core.v1.container.withCommand(['/bin/bash', '-euc', |||
+        rm -f cache
+        ln -s /paper/cache .
         echo eula=true > eula.txt
         exec java -Xmx%s -jar /paper/paper.jar -W /data
       ||| % [ $._config.memory_limit ]]) +

@@ -17,8 +17,10 @@
       "containers":
       - "command":
         - "/bin/bash"
-        - "-c"
+        - "-euc"
         - |
+          rm -f cache
+          ln -s /paper/cache .
           echo eula=true > eula.txt
           exec java -Xmx500M -jar /paper/paper.jar -W /data
         "image": "fish/minecraft:1"
