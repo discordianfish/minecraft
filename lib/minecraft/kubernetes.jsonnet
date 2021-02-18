@@ -1,7 +1,7 @@
 local k = import "github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet";
 
 {
-  _config:: {
+  _config+:: {
     image: "fish/minecraft",
     port: 25565,
     memory_limit: "1024M",
