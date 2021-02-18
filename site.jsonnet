@@ -1,6 +1,6 @@
 (import 'minecraft/main.jsonnet') +
 {
   _config+: {
-      image: "fish/minecraft:" + std.extVar("image_tag")
+      image: "docker.io/fish/minecraft:" + std.extVar("image_tag")
   }
 }
