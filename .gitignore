@@ -1,2 +1,4 @@
 scratch/
 vendor/
+generated/
+tests/actual/

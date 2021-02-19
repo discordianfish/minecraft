@@ -1,0 +1,5 @@
+#!/bin/bash
+set -euo pipefail
+
+rm -r tests/expected
+IMAGE_TAG=test ./generate tests/expected

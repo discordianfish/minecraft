@@ -7,6 +7,8 @@ RUN apt-get -qy update && \
     java -jar paper.jar --help && \
     useradd -d /tmp/ minecraft && \
     ln -s /tmp/ logs && \
-    install -d -o minecraft -g minecraft /data
+    mkdir plugins && \
+    install -d -o minecraft -g minecraft /data && \
+    curl -Lsfo plugins/AmkMcAuth.jar 'https://media.forgecdn.net/files/3042/673/AmkMcAuth.jar'
 USER minecraft
 VOLUME ['/data']
