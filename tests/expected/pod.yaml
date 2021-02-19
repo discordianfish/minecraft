@@ -11,9 +11,12 @@
     - "-euc"
     - |
       rm -f cache
+      # Ugly hacks to separate code (server/plugin jars) from runtime state
       ln -s /paper/cache .
+      mkdir -p plugins
+      cp -rs /paper/plugins/* plugins/ # Symlink all files in /paper/plugins/* to plugins/
       echo eula=true > eula.txt
-      exec java -Xmx1024M -Xms1024M -jar /paper/paper.jar -W /data --plugins /paper/plugins
+      exec java -Xmx1024M -Xms1024M -jar /paper/paper.jar -W /data
     "image": "docker.io/fish/minecraft:test"
     "name": "minecraft"
     "ports":

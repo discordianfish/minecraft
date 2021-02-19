@@ -15,9 +15,12 @@ local k = import "github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet";
       k.core.v1.container.withWorkingDir("/data") +
       k.core.v1.container.withCommand(['/bin/bash', '-euc', |||
         rm -f cache
+        # Ugly hacks to separate code (server/plugin jars) from runtime state
         ln -s /paper/cache .
+        mkdir -p plugins
+        cp -rs /paper/plugins/* plugins/ # Symlink all files in /paper/plugins/* to plugins/
         echo eula=true > eula.txt
-        exec java -Xmx%s -Xms%s -jar /paper/paper.jar -W /data --plugins /paper/plugins
+        exec java -Xmx%s -Xms%s -jar /paper/paper.jar -W /data
       ||| % [ $._config.memory_limit, $._config.memory_limit ]]) +
       k.core.v1.container.withPorts(k.core.v1.containerPort.new($._config.port)) +
       if $._config.single_node then
