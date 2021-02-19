@@ -11,7 +11,8 @@ local builder = (import 'builder.jsonnet');
   Dockerfile: ((import 'minecraft/dockerfile.jsonnet') + {_config+:: $._config}).Dockerfile,
 
   // Build, tag and push it
-  "build.sh": builder.docker('Dockerfile', $._config.image),
+  "image-build.sh": builder.docker_build('Dockerfile', $._config.image),
+  "image-push.sh": builder.docker_push($._config.image),
 
   // Generate Kubernetes manifests
   _manifests:: (import 'kubernetes.jsonnet') + {_config+:: $._config},
