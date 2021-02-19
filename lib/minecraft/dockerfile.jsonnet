@@ -15,8 +15,9 @@ local d = import '../dockerfile.jsonnet';
       'java -jar paper.jar --help',
       'useradd -d /tmp/ minecraft',
       'ln -s /tmp/ logs',
-      'install -d -o minecraft -g minecraft /data',
-    ]),
+      'mkdir plugins',
+      'install -d -o minecraft -g minecraft /data'
+    ] + $._config.image_build_run),
     d.user("minecraft"),
     d.volume(["/data"]),
   ])
