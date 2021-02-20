@@ -22,6 +22,8 @@
     "name": "minecraft"
     "ports":
     - "containerPort": 25565
+    "stdin": true
+    "tty": true
     "volumeMounts":
     - "mountPath": "/data"
       "name": "data"

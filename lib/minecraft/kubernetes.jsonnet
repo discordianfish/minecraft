@@ -24,6 +24,8 @@ local k = import "github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet";
           | sed -u 's#/\(register\|login\).*#/\1 [REDACTED]#'
       ||| % [ $._config.memory_limit, $._config.memory_limit ]]) +
       k.core.v1.container.withPorts(k.core.v1.containerPort.new($._config.port)) +
+      k.core.v1.container.withStdin(true) +
+      k.core.v1.container.withTty(true) +
       if $._config.single_node then
         k.core.v1.container.withVolumeMounts(k.core.v1.volumeMount.new('data', '/data'))
       else {}
