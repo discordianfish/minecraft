@@ -12,7 +12,7 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          name: Build Docker image
+          name: Install jsonnet + jb
           command: |
             curl -Lsfo jsonnet.deb https://github.com/google/go-jsonnet/releases/download/v0.17.0/jsonnet-go_0.17.0_linux_amd64.deb
             sudo dpkg -i jsonnet.deb
@@ -20,7 +20,12 @@ jobs:
             curl -Lsf https://github.com/jsonnet-bundler/jsonnet-bundler/releases/download/v0.4.0/jb-linux-amd64 \
               | install -m755 /dev/stdin /tmp/jb
             /tmp/jb install
-
+      - run:
+          name: Run tests
+          command: ./test
+      - run:
+          name: Build Docker image
+          command: |
             ./generate
             cd generated/
             bash ./image-build.sh
