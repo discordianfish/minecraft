@@ -9,6 +9,7 @@ RUN apt-get -qy update && \
     ln -s /tmp/ logs && \
     mkdir plugins && \
     install -d -o minecraft -g minecraft /data && \
-    curl -Lsfo plugins/AmkMcAuth.jar 'https://media.forgecdn.net/files/3042/673/AmkMcAuth.jar'
+    curl -Lsfo plugins/AmkMcAuth.jar 'https://media.forgecdn.net/files/3042/673/AmkMcAuth.jar' && \
+    curl -Lsfo plugins/GriefPrevention.jar 'https://ci.appveyor.com/api/buildjobs/w2ujrjnh8ty8oofs/artifacts/target%2FGriefPrevention.jar'
 USER minecraft
 VOLUME ['/data']
