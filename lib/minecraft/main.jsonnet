@@ -1,12 +1,9 @@
 local k = import "github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet";
-local minecraft = (import 'kubernetes.jsonnet');
 local builder = (import 'builder.jsonnet');
 
 
 {
-  _config+:: {
-    image: "fish/minecraft",
-  },
+  local manifests = (import 'kubernetes.jsonnet') + {_config+:: $._config},
   //Create Dockerfile
   "minecraft/Dockerfile": ((import 'minecraft/dockerfile.jsonnet') + {_config+:: $._config}).Dockerfile,
 
@@ -15,7 +12,6 @@ local builder = (import 'builder.jsonnet');
   "minecraft/image-push.sh": builder.docker_push($._config.image),
 
   // Generate Kubernetes manifests
-  _manifests:: (import 'kubernetes.jsonnet') + {_config+:: $._config},
-  "minecraft/deployment.yaml": std.manifestYamlDoc($._manifests.deployment),
-  "minecraft/pod.yaml": std.manifestYamlDoc(k.core.v1.pod.new("minecraft") + $._manifests.deployment.spec.template),
+  "minecraft/deployment.yaml": std.manifestYamlDoc(manifests.deployment),
+  "minecraft/pod.yaml": std.manifestYamlDoc(k.core.v1.pod.new("minecraft") + manifests.deployment.spec.template),
 }

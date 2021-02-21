@@ -9,5 +9,6 @@
   run(script): "RUN " + std.join(" && \\\n    ", script),
   user(user): "USER %s" % user,
   volume(volumes): "VOLUME [%s]" % std.join(",", std.map(std.escapeStringBash, volumes)),
-  entrypoint(entrypoint): "ENTRYPOINT [%s]" % std.join(",", std.map(std.escapeStringBash, entrypoint)),
+  entrypoint(entrypoint): "ENTRYPOINT [%s]" % std.join(",", entrypoint),
+  copy(src, dst): "COPY \"%s\" \"%s\"" % [ src, dst ],
 }
