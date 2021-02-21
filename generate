@@ -3,4 +3,9 @@ set -euo pipefail
 IMAGE_TAG=${IMAGE_TAG:-$(git rev-parse HEAD)}
 TARGET=${1:-generated/}
 mkdir -p "$TARGET"
-jsonnet -J vendor/ -J lib/ --ext-str image_tag="$IMAGE_TAG" site.jsonnet -S --multi "$TARGET"
+jsonnet -J vendor/ -J lib/ \
+  --ext-str image_tag="$IMAGE_TAG" \
+  site.jsonnet \
+  -S \
+  --create-output-dirs \
+  --multi "$TARGET"
