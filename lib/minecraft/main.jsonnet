@@ -8,14 +8,14 @@ local builder = (import 'builder.jsonnet');
     image: "fish/minecraft",
   },
   //Create Dockerfile
-  Dockerfile: ((import 'minecraft/dockerfile.jsonnet') + {_config+:: $._config}).Dockerfile,
+  "minecraft/Dockerfile": ((import 'minecraft/dockerfile.jsonnet') + {_config+:: $._config}).Dockerfile,
 
   // Build, tag and push it
-  "image-build.sh": builder.docker_build('Dockerfile', $._config.image),
-  "image-push.sh": builder.docker_push($._config.image),
+  "minecraft/image-build.sh": builder.docker_build('minecraft/Dockerfile', $._config.image),
+  "minecraft/image-push.sh": builder.docker_push($._config.image),
 
   // Generate Kubernetes manifests
   _manifests:: (import 'kubernetes.jsonnet') + {_config+:: $._config},
-  "deployment.yaml": std.manifestYamlDoc($._manifests.deployment),
-  "pod.yaml": std.manifestYamlDoc(k.core.v1.pod.new("minecraft") + $._manifests.deployment.spec.template),
+  "minecraft/deployment.yaml": std.manifestYamlDoc($._manifests.deployment),
+  "minecraft/pod.yaml": std.manifestYamlDoc(k.core.v1.pod.new("minecraft") + $._manifests.deployment.spec.template),
 }

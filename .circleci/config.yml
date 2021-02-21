@@ -1,8 +1,6 @@
 version: 2.1
 executors:
   docker-publisher:
-    environment:
-      IMAGE_NAME: fish/minecraft
     docker:
       - image: circleci/buildpack-deps:stretch
 jobs:
@@ -24,20 +22,17 @@ jobs:
           name: Run tests
           command: ./test
       - run:
-          name: Build Docker image
+          name: Build Docker images
           command: |
             ./generate
             cd generated/
-            bash ./image-build.sh
-      - run:
-          name: Archive Docker image
-          command: docker save -o image.tar $IMAGE_NAME:$CIRCLE_SHA1
+            for s in ./*/image-build.sh; do bash "$s"; done
       - store_artifacts:
           path: generated/
       - persist_to_workspace:
           root: .
           paths:
-            - ./generated/image-push.sh
+            - ./generated/
             - ./image.tar
   publish:
     executor: docker-publisher
@@ -46,13 +41,10 @@ jobs:
           at: /tmp/workspace
       - setup_remote_docker
       - run:
-          name: Load archived Docker image
-          command: docker load -i /tmp/workspace/image.tar
-      - run:
           name: Publish Docker Image to Docker Hub
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            bash /tmp/workspace/generated/image-push.sh
+            for s in /tmp/workspace/generated/*/image-push.sh; do bash "$s"; done
 workflows:
   version: 2
   build:
