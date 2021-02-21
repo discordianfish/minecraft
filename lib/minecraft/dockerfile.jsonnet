@@ -18,7 +18,6 @@ local d = import '../dockerfile.jsonnet';
       'mkdir plugins',
       'install -d -o minecraft -g minecraft /data'
     ] + $._config.image_build_run),
-    d.user("minecraft"),
     d.volume(["/data"]),
   ])
 }

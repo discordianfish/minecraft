@@ -2,7 +2,8 @@ local k = import "github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet";
 
 {
   _config+:: {
-    image: "fish/minecraft",
+    image: error "Must define image",
+    uid: 1000,
     port: 25565,
     memory_limit: "1024M",
     single_node: true, // FIXME: make this something more meaningful "static host assignment" etc
@@ -26,6 +27,7 @@ local k = import "github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet";
       k.core.v1.container.withPorts(k.core.v1.containerPort.new($._config.port)) +
       k.core.v1.container.withStdin(true) +
       k.core.v1.container.withTty(true) +
+      k.core.v1.container.securityContext.withRunAsUser($._config.uid) +
       if $._config.single_node then
         k.core.v1.container.withVolumeMounts(k.core.v1.volumeMount.new('data', '/data'))
       else {}
