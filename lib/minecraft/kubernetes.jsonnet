@@ -6,9 +6,7 @@ local k = import "github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet";
     uid: 1000,
     port: 25565,
     memory_limit: "1024M",
-    single_node: true, // FIXME: make this something more meaningful "static host assignment" etc
-                       // or a mixin..
-    data_host_path: "/data/minecraft",
+   data_host_path: "/data/minecraft",
   },
   deployment:
     k.apps.v1.deployment.new(name="minecraft", containers=[
