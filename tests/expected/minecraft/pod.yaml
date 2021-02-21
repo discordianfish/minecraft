@@ -22,6 +22,8 @@
     "name": "minecraft"
     "ports":
     - "containerPort": 25565
+    "securityContext":
+      "runAsUser": 1000
     "stdin": true
     "tty": true
     "volumeMounts":
