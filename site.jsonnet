@@ -1,6 +1,7 @@
 (import 'minecraft/main.jsonnet') +
 (import 'minecraft/plugins/amk_mc_auth_se.jsonnet') +
 (import 'minecraft/plugins/grief_prevention.jsonnet') +
+(import 'minecraft/plugins/geyser.jsonnet') +
 (import 'overviewer/main.jsonnet') +
 {
   _config+: {
