@@ -16,7 +16,7 @@
       mkdir -p plugins
       cp -nrs /paper/plugins/* plugins/ # Symlink all files in /paper/plugins/* to plugins/
       echo eula=true > eula.txt
-      exec java -Xmx1024M -Xms1024M -jar /paper/paper.jar -W /data \
+      exec java -Xmx2048M -Xms2048M -jar /paper/paper.jar -W /data \
         | sed -u 's#/\(register\|login\).*#/\1 [REDACTED]#'
     "image": "docker.io/fish/minecraft:test"
     "name": "minecraft"

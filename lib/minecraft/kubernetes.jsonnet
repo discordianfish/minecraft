@@ -5,7 +5,7 @@ local k = import "github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet";
     image: error "Must define image",
     uid: 1000,
     port: 25565,
-    memory_limit: "1024M",
+    memory_limit: "2048M",
    data_host_path: "/data/minecraft",
   },
   deployment:
