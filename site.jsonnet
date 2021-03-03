@@ -9,6 +9,7 @@
     single_node: true, // FIXME: make this something more meaningful "static host assignment" etc
     overviewer+: {
       image: "docker.io/fish/overviewer:" + std.extVar("image_tag"),
-    }
+    },
+    memory_limit: 2.5 * 1024 + 'M',
   }
 }
