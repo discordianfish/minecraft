@@ -10,6 +10,6 @@
     overviewer+: {
       image: "docker.io/fish/overviewer:" + std.extVar("image_tag"),
     },
-    memory_limit: 2.5 * 1024 + 'M',
+    memory_limit: 2 * 1024 + 'M',
   }
 }
