@@ -22,7 +22,7 @@
     "name": "minecraft"
     "ports":
     - "containerPort": 25565
-    - "containerPort": 8100
+    - "containerPort": 8123
     "securityContext":
       "runAsUser": 1000
     "stdin": true

@@ -2,7 +2,7 @@
 (import 'minecraft/plugins/amk_mc_auth_se.jsonnet') +
 (import 'minecraft/plugins/grief_prevention.jsonnet') +
 (import 'minecraft/plugins/geyser.jsonnet') +
-(import 'minecraft/plugins/blue_map.jsonnet') +
+(import 'minecraft/plugins/dynmap.jsonnet') +
 (import 'overviewer/main.jsonnet') +
 {
   _config+: {
