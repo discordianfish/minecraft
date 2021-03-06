@@ -11,5 +11,6 @@ RUN apt-get -qy update && \
     install -d -o minecraft -g minecraft /data && \
     curl -Lsfo plugins/AmkMcAuth.jar 'https://media.forgecdn.net/files/3042/673/AmkMcAuth.jar' && \
     curl -Lsfo plugins/GriefPrevention.jar 'https://ci.appveyor.com/api/buildjobs/w2ujrjnh8ty8oofs/artifacts/target%2FGriefPrevention.jar' && \
-    curl -Lsfo plugins/Geyser.jar 'https://ci.opencollab.dev/job/GeyserMC/job/Geyser/job/master/628/artifact/bootstrap/spigot/target/Geyser-Spigot.jar'
+    curl -Lsfo plugins/Geyser.jar 'https://ci.opencollab.dev/job/GeyserMC/job/Geyser/job/master/628/artifact/bootstrap/spigot/target/Geyser-Spigot.jar' && \
+    curl -Lsfo plugins/BlueMap.jar 'https://github.com/BlueMap-Minecraft/BlueMap/releases/download/v1.3.1/BlueMap-1.3.1-spigot.jar'
 VOLUME ['/data']

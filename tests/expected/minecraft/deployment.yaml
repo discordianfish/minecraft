@@ -31,6 +31,7 @@
         "name": "minecraft"
         "ports":
         - "containerPort": 25565
+        - "containerPort": 8100
         "securityContext":
           "runAsUser": 1000
         "stdin": true
