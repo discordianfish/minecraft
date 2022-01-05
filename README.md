@@ -12,3 +12,7 @@ cfssl gencert -initca ca.json | cfssljson -bare ca
 cfssl gencert -ca ca.pem -ca-key ca-key.pem --config ca.json -profile www kubelet.json | cfssljson -bare kubelet
 cfssl gencert -ca ca.pem -ca-key ca-key.pem --config ca.json -profile client client.json | cfssljson -bare client
 ```
+
+## TODO
+- Keep manifests as jsonnet to allow importing this from downstream / e.g my
+  home repo
