@@ -1,15 +1,17 @@
 FROM ubuntu:20.04
 WORKDIR /paper
-ENV PAPER_DL_URL=https://papermc.io/api/v2/projects/paper/versions/1.16.5/builds/468/downloads/paper-1.16.5-468.jar
-RUN apt-get -qy update && \
-    apt-get -qy install apt-transport-https curl openjdk-8-jre-headless && \
-    curl -Lsfo paper.jar "$PAPER_DL_URL" && \
-    java -jar paper.jar --help && \
+ENV PAPER_DL_URL=https://papermc.io/api/v2/projects/paper/versions/1.18.1/builds/134/downloads/paper-1.18.1-134.jar
+RUN set -x && \
+    apt-get -qy update && \
+    apt-get -qy install apt-transport-https curl openjdk-17-jre-headless && \
+    curl -Lfo paper.jar "$PAPER_DL_URL" && \
+    java -jar /paper/paper.jar -Dpaperclip.patchonly=true && \
     useradd -d /tmp/ minecraft && \
     ln -s /tmp/ logs && \
     mkdir plugins && \
     install -d -o minecraft -g minecraft /data && \
-    curl -Lsfo plugins/AmkMcAuth.jar 'https://media.forgecdn.net/files/3042/673/AmkMcAuth.jar' && \
-    curl -Lsfo plugins/GriefPrevention.jar 'https://ci.appveyor.com/api/buildjobs/w2ujrjnh8ty8oofs/artifacts/target%2FGriefPrevention.jar' && \
-    curl -Lsfo plugins/Geyser.jar 'https://ci.opencollab.dev/job/GeyserMC/job/Geyser/job/master/628/artifact/bootstrap/spigot/target/Geyser-Spigot.jar'
+    curl -Lfo plugins/AmkMcAuth.jar 'https://media.forgecdn.net/files/3042/673/AmkMcAuth.jar' && \
+    curl -Lfo plugins/GriefPrevention.jar 'https://media.forgecdn.net/files/3173/411/GriefPrevention.jar' && \
+    curl -Lfo plugins/Geyser.jar 'https://ci.opencollab.dev/job/GeyserMC/job/Geyser/job/master/lastSuccessfulBuild/artifact/bootstrap/spigot/target/Geyser-Spigot.jar' && \
+    curl -Lfo plugins/Dynmap.jar 'https://github.com/webbukkit/dynmap/releases/download/v3.2.1/Dynmap-3.2.1-spigot.jar'
 VOLUME ['/data']
