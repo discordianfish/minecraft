@@ -13,5 +13,5 @@ RUN set -x && \
     curl -Lfo plugins/AmkMcAuth.jar 'https://media.forgecdn.net/files/3042/673/AmkMcAuth.jar' && \
     curl -Lfo plugins/GriefPrevention.jar 'https://media.forgecdn.net/files/3173/411/GriefPrevention.jar' && \
     curl -Lfo plugins/Geyser.jar 'https://ci.opencollab.dev/job/GeyserMC/job/Geyser/job/master/lastSuccessfulBuild/artifact/bootstrap/spigot/target/Geyser-Spigot.jar' && \
-    curl -Lfo plugins/Dynmap.jar 'https://github.com/webbukkit/dynmap/releases/download/v3.2.1/Dynmap-3.2.1-spigot.jar'
+    curl -Lfo plugins/Dynmap.jar 'https://github.com/webbukkit/dynmap/releases/download/v3.3-beta-2/Dynmap-3.3-beta-2-spigot.jar'
 VOLUME ['/data']
