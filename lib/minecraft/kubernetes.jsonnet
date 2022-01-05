@@ -12,13 +12,10 @@ local k = import 'github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet';
     k.core.v1.container.new(name='minecraft', image=$._config.image) +
     k.core.v1.container.withWorkingDir('/data') +
     k.core.v1.container.withCommand(['/bin/bash', '-euc', |||
-      rm -f cache
-      # Ugly hacks to separate code (server/plugin jars) from runtime state
-      ln -s /paper/cache .
       mkdir -p plugins
       cp -nrs /paper/plugins/* plugins/ # Symlink all files in /paper/plugins/* to plugins/
       echo eula=true > eula.txt
-      exec java -Xmx%s -Xms%s -jar /paper/paper.jar -W /data \
+      exec java -Xmx%s -Xms%s -DbundlerRepoDir=/paper -jar /paper/paper.jar -W /data \
         | sed -u 's#/\(register\|login\).*#/\1 [REDACTED]#'
     ||| % [$._config.memory_limit, $._config.memory_limit]]) +
     k.core.v1.container.withPorts(k.core.v1.containerPort.new($._config.port)) +
