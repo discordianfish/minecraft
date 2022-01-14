@@ -1,0 +1,9 @@
+#!/bin/bash
+set -euo pipefail
+BUILD_COMMAND=${BUILD_COMMAND:-podman build}
+TARGET=${1:-generated/}
+
+dir=$(realpath "$TARGET/containerfiles")
+find "$dir" -type f | while read -r containerfile; do
+  $BUILD_COMMAND -t "${containerfile#$dir/}" -f "$containerfile"
+done

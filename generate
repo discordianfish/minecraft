@@ -1,10 +1,11 @@
 #!/bin/bash
 set -euo pipefail
-IMAGE_TAG=${IMAGE_TAG:-$(git rev-parse HEAD)}
+build_version=${build_version:-$(git rev-parse HEAD)}
 TARGET=${1:-generated/}
+rm -rf "$TARGET"
 mkdir -p "$TARGET"
 jsonnet -J vendor/ -J lib/ \
-  --ext-str image_tag="$IMAGE_TAG" \
+  --ext-str build_version="$build_version" \
   site.jsonnet \
   -S \
   --create-output-dirs \

@@ -7,8 +7,6 @@
   "selector":
     "matchLabels":
       "name": "overviewer"
-  "strategy":
-    "type": "Recreate"
   "template":
     "metadata":
       "labels":
@@ -25,7 +23,7 @@
             overviewer.py --config /etc/config.py
             sleep 3600
           done
-        "image": "docker.io/fish/overviewer:test"
+        "image": "docker.io/fish/minecraft:35fd1c6093fcf4e4db0563f1ea263a0d691c4c9d"
         "name": "overviewer"
         "securityContext":
           "runAsUser": 1000
@@ -42,8 +40,3 @@
           "name": "data"
           "readOnly": true
           "subPath": "overviewer"
-      "hostNetwork": true
-      "volumes":
-      - "hostPath":
-          "path": "/data/minecraft"
-        "name": "data"
