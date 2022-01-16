@@ -1,0 +1,70 @@
+"apiVersion": "batch/v1"
+"kind": "Job"
+"metadata":
+  "name": "build-393c7037ba67bb69f77b551ae4e72ba0"
+  "namespace": "default"
+"spec":
+  "template":
+    "metadata":
+      "annotations":
+        "container.apparmor.security.beta.kubernetes.io/builder": "unconfined"
+    "spec":
+      "containers":
+      - "args":
+        - "/bin/bash"
+        - "-xeuo"
+        - "pipefail"
+        - "-c"
+        - |
+          mkdir /tmp/context
+          echo 'FROM ubuntu:20.04
+          WORKDIR /paper
+          ENV PAPER_DL_URL=https://papermc.io/api/v2/projects/paper/versions/1.18.1/builds/134/downloads/paper-1.18.1-134.jar
+          RUN set -x && \
+              echo '"'"'APT::Sandbox::User "root";'"'"' > /etc/apt/apt.conf.d/disable-sandbox && \
+              apt-get -qy update && \
+              apt-get -qy install apt-transport-https curl openjdk-17-jre-headless && \
+              curl -Lfo paper.jar "$PAPER_DL_URL" && \
+              java -jar /paper/paper.jar -Dpaperclip.patchonly=true && \
+              useradd -d /tmp/ minecraft && \
+              ln -s /tmp/ logs && \
+              mkdir plugins && \
+              install -d -o minecraft -g minecraft /data && \
+              curl -Lfo plugins/AmkMcAuth.jar '"'"'https://media.forgecdn.net/files/3042/673/AmkMcAuth.jar'"'"' && \
+              curl -Lfo plugins/GriefPrevention.jar '"'"'https://media.forgecdn.net/files/3173/411/GriefPrevention.jar'"'"' && \
+              curl -Lfo plugins/Geyser.jar '"'"'https://ci.opencollab.dev/job/GeyserMC/job/Geyser/job/master/lastSuccessfulBuild/artifact/bootstrap/spigot/target/Geyser-Spigot.jar'"'"' && \
+              curl -Lfo plugins/Dynmap.jar '"'"'https://github.com/webbukkit/dynmap/releases/download/v3.3-beta-2/Dynmap-3.3-beta-2-spigot.jar'"'"'
+          VOLUME ['"'"'/data'"'"']
+          ' > /tmp/context/Containerfile
+          podman build --isolation chroot -t "docker.io/fish/minecraft:test" /tmp/context
+          podman push "docker.io/fish/minecraft:test"
+        "image": "quay.io/podman/stable"
+        "name": "builder"
+        "resources":
+          "limits":
+            "github.com/fuse": "1"
+        "securityContext":
+          "runAsUser": 1000
+        "volumeMounts":
+        - "mountPath": "/home/podman/.local/share/containers"
+          "name": "podman-local"
+        - "mountPath": "/etc/ssl/certs"
+          "name": "tls-certs"
+          "readOnly": true
+        - "mountPath": "/home/podman/.docker"
+          "name": "image-push-secret"
+          "readOnly": true
+      "restartPolicy": "OnFailure"
+      "volumes":
+      - "hostPath":
+          "path": "/tmp/podman-containers"
+        "name": "podman-local"
+      - "hostPath":
+          "path": "/etc/ssl/certs"
+        "name": "tls-certs"
+      - "name": "image-push-secret"
+        "secret":
+          "items":
+          - "key": ".dockerconfigjson"
+            "path": "config.json"
+          "secretName": "image-pull-secret"

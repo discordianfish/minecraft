@@ -1,4 +1,4 @@
-local lib = import 'lib/lib.libsonnet';
+local lib = import 'lib.libsonnet';
 
 local build_version = std.extVar('build_version');
 local container_registry = 'docker.io/fish';
@@ -23,6 +23,7 @@ local minecraft = minecraft_app.new({
     (import 'apps/minecraft/plugins/geyser.jsonnet'),
     (import 'apps/minecraft/plugins/dynmap.jsonnet'),
   ],
+  build_job: true,
 });
 
 local overviewer = overviewer_app.new({

@@ -23,7 +23,7 @@
             overviewer.py --config /etc/config.py
             sleep 3600
           done
-        "image": "docker.io/fish/minecraft:35fd1c6093fcf4e4db0563f1ea263a0d691c4c9d"
+        "image": "docker.io/fish/minecraft:test"
         "name": "overviewer"
         "securityContext":
           "runAsUser": 1000

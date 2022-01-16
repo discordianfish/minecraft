@@ -12,6 +12,7 @@ local default_config = {
       c.env('PAPER_DL_URL', config.papermc_url),
       c.run([
         'set -x',
+        'echo \'APT::Sandbox::User "root";\' > /etc/apt/apt.conf.d/disable-sandbox',
         'apt-get -qy update',
         'apt-get -qy install apt-transport-https curl openjdk-17-jre-headless',
         'curl -Lfo paper.jar "$PAPER_DL_URL"',

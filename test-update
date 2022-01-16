@@ -2,4 +2,4 @@
 set -euo pipefail
 
 rm -fr tests/expected
-IMAGE_TAG=test ./generate tests/expected
+build_version=test ./generate tests/expected

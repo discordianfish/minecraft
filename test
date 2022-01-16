@@ -1,5 +1,5 @@
 #!/bin/bash
 set -euo pipefail
 
-IMAGE_TAG=test ./generate tests/actual
+build_version=test ./generate tests/actual
 diff -ur tests/expected tests/actual

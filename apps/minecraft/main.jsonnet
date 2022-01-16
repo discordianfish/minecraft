@@ -1,4 +1,5 @@
 local k = import 'github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet';
+local lib = import 'lib.libsonnet';
 
 local default_config = {
   single_node: false,
@@ -7,6 +8,7 @@ local default_config = {
   papermc_url: error 'Must specify papermc_url',
   uid: 1000,
   port: 25565,
+  build_job: false,
   data_host_path: '/data/minecraft',
   args: [
     '-XX:+UseG1GC',
@@ -66,6 +68,6 @@ local default_config = {
             ]) +
             k.apps.v1.deployment.spec.strategy.withType('Recreate')
           else {},
-      },
+      } + if config.build_job then lib.podman_build_job(config.image, self.Containerfile) else {},
     },
 }
