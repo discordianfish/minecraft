@@ -1,4 +1,4 @@
-local c = (import 'lib.libsonnet').containerfile;
+local c = (import '../../lib/lib.libsonnet').containerfile;
 
 local default_config = {
 };

@@ -1,5 +1,5 @@
+local lib = import '../../lib/lib.libsonnet';
 local k = import 'github.com/jsonnet-libs/k8s-alpha/1.19/main.libsonnet';
-local lib = import 'lib.libsonnet';
 
 local default_config = {
   single_node: false,
