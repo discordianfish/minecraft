@@ -19,7 +19,7 @@
           mkdir /tmp/context
           echo 'FROM ubuntu:22.04
           WORKDIR /paper
-          ENV PAPER_DL_URL=https://papermc.io/api/v2/projects/paper/versions/1.18.1/builds/134/downloads/paper-1.18.1-134.jar
+          ENV PAPER_DL_URL=https://papermc.io/api/v2/projects/paper/versions/1.19.4/builds/519/downloads/paper-1.19.4-519.jar
           RUN set -x && \
               echo '"'"'APT::Sandbox::User "root";'"'"' > /etc/apt/apt.conf.d/disable-sandbox && \
               apt-get -qy update && \

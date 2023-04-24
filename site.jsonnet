@@ -7,8 +7,8 @@ local minecraft_app = (import 'apps/minecraft/main.jsonnet');
 
 local image(name) = container_registry + '/' + name + ':' + build_version;
 
-local minecraft_version = '1.18.1';
-local papermc_build = '134';
+local minecraft_version = '1.19.4';
+local papermc_build = '519';
 
 local minecraft = minecraft_app.new({
   image: image('minecraft'),
