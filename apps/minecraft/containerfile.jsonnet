@@ -7,7 +7,7 @@ local default_config = {
   new(opts):
     local config = default_config + opts;
     [
-      c.from('ubuntu:20.04'),
+      c.from('ubuntu:22.04'),
       c.workdir('/paper'),
       c.env('PAPER_DL_URL', config.papermc_url),
       c.run([
@@ -16,7 +16,7 @@ local default_config = {
         'apt-get -qy update',
         'apt-get -qy install apt-transport-https curl openjdk-17-jre-headless',
         'curl -Lfo paper.jar "$PAPER_DL_URL"',
-        'java -jar /paper/paper.jar -Dpaperclip.patchonly=true',
+        'java -Dpaperclip.patchonly=true -jar /paper/paper.jar',
         'useradd -d /tmp/ minecraft',
         'ln -s /tmp/ logs',
         'mkdir plugins',
