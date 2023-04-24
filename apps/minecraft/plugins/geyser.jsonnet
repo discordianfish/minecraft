@@ -1,5 +1,5 @@
 {
   build_steps: [
-    "curl -Lfo plugins/Geyser.jar 'https://ci.opencollab.dev/job/GeyserMC/job/Geyser/job/master/lastSuccessfulBuild/artifact/bootstrap/spigot/target/Geyser-Spigot.jar'",
+    "curl -Lfo plugins/Geyser.jar 'https://download.geysermc.org/v2/projects/geyser/versions/2.1.0/builds/47/downloads/spigot'",
   ],
 }
