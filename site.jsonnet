@@ -8,10 +8,11 @@ local minecraft_app = (import 'apps/minecraft/main.jsonnet');
 local image(name) = container_registry + '/' + name + ':' + build_version;
 
 local minecraft_version = '1.18.1';
+local papermc_build = '134';
 
 local minecraft = minecraft_app.new({
   image: image('minecraft'),
-  papermc_url: 'https://papermc.io/api/v2/projects/paper/versions/' + minecraft_version + '/builds/134/downloads/paper-' + minecraft_version + '-134.jar',
+  papermc_url: 'https://papermc.io/api/v2/projects/paper/versions/' + minecraft_version + '/builds/' + papermc_build + '/downloads/paper-' + minecraft_version + '-' + papermc_build + '.jar',
   single_node: true,  // FIXME: make this something more meaningful "static host assignment" etc
   overviewer+: {
     image: 'docker.io/fish/overviewer:' + std.extVar('image_tag'),
