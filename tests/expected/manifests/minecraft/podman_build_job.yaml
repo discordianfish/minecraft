@@ -33,7 +33,7 @@
               curl -Lfo plugins/AmkMcAuth.jar '"'"'https://media.forgecdn.net/files/3042/673/AmkMcAuth.jar'"'"' && \
               curl -Lfo plugins/GriefPrevention.jar '"'"'https://media.forgecdn.net/files/3173/411/GriefPrevention.jar'"'"' && \
               curl -Lfo plugins/Geyser.jar '"'"'https://download.geysermc.org/v2/projects/geyser/versions/2.1.0/builds/47/downloads/spigot'"'"' && \
-              curl -Lfo plugins/Dynmap.jar '"'"'https://github.com/webbukkit/dynmap/releases/download/v3.3-beta-2/Dynmap-3.3-beta-2-spigot.jar'"'"'
+              curl -Lfo plugins/Dynmap.jar '"'"'https://mediafilez.forgecdn.net/files/4444/998/Dynmap-3.5-beta-3-spigot.jar'"'"'
           VOLUME ["/data"]
           ' > /tmp/context/Containerfile
           podman build --isolation chroot -t "docker.io/fish/minecraft:test" /tmp/context
